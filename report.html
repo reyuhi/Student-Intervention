@@ -11802,7 +11802,7 @@ Our predictions, based on inputs should guess when a student might give up.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import libraries</span>
@@ -11854,14 +11854,14 @@ Our predictions, based on inputs should guess when a student might give up.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Calculate number of students</span>
 <span class="n">n_students</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="p">)</span>
 
 <span class="c1"># TODO: Calculate number of features</span>
-<span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="c1"># TODO: Calculate passing students</span>
 
@@ -11891,7 +11891,7 @@ Our predictions, based on inputs should guess when a student might give up.</p>
 <span class="n">n_failed</span> <span class="o">=</span> <span class="n">count</span>
 
 <span class="c1"># TODO: Calculate graduation rate</span>
-<span class="n">grad_rate</span> <span class="o">=</span> <span class="n">n_passed</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="p">(</span><span class="n">n_passed</span><span class="o">+</span><span class="n">n_failed</span><span class="p">)</span>
+<span class="n">grad_rate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_passed</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">n_passed</span><span class="p">)</span><span class="o">+</span><span class="nb">float</span><span class="p">(</span><span class="n">n_failed</span><span class="p">))</span>
 
 <span class="c1"># Print the results</span>
 <span class="k">print</span> <span class="s2">&quot;Total number of students: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_students</span><span class="p">)</span>
@@ -11912,10 +11912,10 @@ Our predictions, based on inputs should guess when a student might give up.</p>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Total number of students: 395
-Number of features: 31
+Number of features: 30
 Number of students who passed: 265
 Number of students who failed: 130
-Graduation rate of the class: 67.00%
+Graduation rate of the class: 67.09%
 </pre>
 </div>
 </div>
@@ -11938,7 +11938,7 @@ Graduation rate of the class: 67.00%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Extract feature columns</span>
@@ -11958,6 +11958,10 @@ Graduation rate of the class: 67.00%
 <span class="c1"># Show the feature information by printing the first five rows</span>
 <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Feature values:&quot;</span>
 <span class="k">print</span> <span class="n">X_all</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">factorplot</span><span class="p">(</span><span class="s2">&quot;failures&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;paid&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">student_data</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;passed&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">);</span>
 </pre></div>
 
 </div>
@@ -12002,6 +12006,126 @@ Feature values:
 </div>
 </div>
 
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+HO6t61B4MAAAAABJRU5ErkJggg==
+"
+>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -12020,7 +12144,7 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">preprocess_features</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -12091,7 +12215,7 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import any additional functionality you may need here</span>
@@ -12227,6 +12351,7 @@ J. Ghent and J. McDonald, "Facial Expression Classification using a One-Against-
 <a href="http://people.revoledu.com/kardi/tutorial/KNN/Strength%20and%20Weakness.htm">http://people.revoledu.com/kardi/tutorial/KNN/Strength%20and%20Weakness.htm</a>
 <a href="http://www.cs.upc.edu/~bejar/apren/docum/trans/03d-algind-knn-eng.pdf">http://www.cs.upc.edu/~bejar/apren/docum/trans/03d-algind-knn-eng.pdf</a>
 <a href="http://scikit-learn.org/0.17/modules/svm.html">http://scikit-learn.org/0.17/modules/svm.html</a></p>
+<p><strong>In general, with model selection it's often a good idea to try out simpler methods like Logistic Regression as a benchmark, and then move on to non-linear classifiers such as your choice of SVM, Decision Trees, and KNN.</strong></p>
 
 </div>
 </div>
@@ -12251,7 +12376,7 @@ J. Ghent and J. McDonald, "Facial Expression Classification using a One-Against-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">train_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
@@ -12324,7 +12449,7 @@ J. Ghent and J. McDonald, "Facial Expression Classification using a One-Against-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import the three supervised learning models from sklearn</span>
@@ -12337,8 +12462,8 @@ J. Ghent and J. McDonald, "Facial Expression Classification using a One-Against-
 
 <span class="c1"># TODO: Initialize the three models</span>
 <span class="n">clf_A</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">clf_B</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">clf_C</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span>
+<span class="n">clf_B</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">weights</span> <span class="o">=</span> <span class="s1">&#39;uniform&#39;</span><span class="p">,</span><span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span> <span class="c1">#KNeighborsClassifier doesn&#39;t have random_state</span>
+<span class="n">clf_C</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="c1"># TODO: Set up the training set sizes</span>
 <span class="n">X_train_100</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span>
@@ -12370,6 +12495,18 @@ J. Ghent and J. McDonald, "Facial Expression Classification using a One-Against-
 <span class="k">print</span> <span class="n">train_predict</span><span class="p">(</span><span class="n">clf_B</span><span class="p">,</span><span class="n">X_train_300</span><span class="p">,</span><span class="n">y_train_300</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;Decision SVC (300 Size)&quot;</span>
 <span class="k">print</span> <span class="n">train_predict</span><span class="p">(</span><span class="n">clf_C</span><span class="p">,</span><span class="n">X_train_300</span><span class="p">,</span><span class="n">y_train_300</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+
+<span class="c1"># Default Models:</span>
+<span class="n">clf_A</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="n">clf_B</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+<span class="n">clf_C</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span>
+
+<span class="k">print</span> <span class="s2">&quot;Decision Tree Classifier (300 Size) Default&quot;</span>
+<span class="k">print</span> <span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span><span class="n">X_train_300</span><span class="p">,</span><span class="n">y_train_300</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">&quot;Decision KNN (300 Size) Default&quot;</span>
+<span class="k">print</span> <span class="n">train_predict</span><span class="p">(</span><span class="n">clf_B</span><span class="p">,</span><span class="n">X_train_300</span><span class="p">,</span><span class="n">y_train_300</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">&quot;Decision SVC (300 Size) Default&quot;</span>
+<span class="k">print</span> <span class="n">train_predict</span><span class="p">(</span><span class="n">clf_C</span><span class="p">,</span><span class="n">X_train_300</span><span class="p">,</span><span class="n">y_train_300</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12384,74 +12521,98 @@ J. Ghent and J. McDonald, "Facial Expression Classification using a One-Against-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Decision Tree Classifier (100 Size)
 Training a DecisionTreeClassifier using a training set size of 100. . .
-Trained model in 0.0060 seconds
-Made predictions in 0.0010 seconds.
+Trained model in 0.0090 seconds
+Made predictions in 0.0020 seconds.
 F1 score for training set: 1.0000.
 Made predictions in 0.0020 seconds.
 F1 score for test set: 0.6870.
 None
 Decision KNN (100 Size)
 Training a KNeighborsClassifier using a training set size of 100. . .
-Trained model in 0.0050 seconds
-Made predictions in 0.0070 seconds.
+Trained model in 0.0060 seconds
+Made predictions in 0.0090 seconds.
 F1 score for training set: 0.8369.
-Made predictions in 0.0060 seconds.
+Made predictions in 0.0070 seconds.
 F1 score for test set: 0.7324.
 None
 Decision SVC (100 Size)
 Training a SVC using a training set size of 100. . .
-Trained model in 0.0070 seconds
-Made predictions in 0.0030 seconds.
-F1 score for training set: 0.8366.
+Trained model in 0.0080 seconds
 Made predictions in 0.0040 seconds.
+F1 score for training set: 0.8366.
+Made predictions in 0.0030 seconds.
 F1 score for test set: 0.8228.
 None
 Decision Tree Classifier (200 Size)
 Training a DecisionTreeClassifier using a training set size of 200. . .
 Trained model in 0.0080 seconds
-Made predictions in 0.0020 seconds.
+Made predictions in 0.0030 seconds.
 F1 score for training set: 1.0000.
-Made predictions in 0.0010 seconds.
+Made predictions in 0.0020 seconds.
 F1 score for test set: 0.7059.
 None
 Decision KNN (200 Size)
 Training a KNeighborsClassifier using a training set size of 200. . .
-Trained model in 0.0050 seconds
-Made predictions in 0.0100 seconds.
+Trained model in 0.0060 seconds
+Made predictions in 0.0120 seconds.
 F1 score for training set: 0.8441.
 Made predictions in 0.0080 seconds.
 F1 score for test set: 0.7669.
 None
 Decision SVC (200 Size)
 Training a SVC using a training set size of 200. . .
-Trained model in 0.0120 seconds
-Made predictions in 0.0070 seconds.
+Trained model in 0.0140 seconds
+Made predictions in 0.0090 seconds.
 F1 score for training set: 0.8552.
-Made predictions in 0.0040 seconds.
+Made predictions in 0.0050 seconds.
 F1 score for test set: 0.7947.
 None
 Decision Tree Classifier (300 Size)
 Training a DecisionTreeClassifier using a training set size of 300. . .
-Trained model in 0.0090 seconds
-Made predictions in 0.0020 seconds.
+Trained model in 0.0100 seconds
+Made predictions in 0.0040 seconds.
 F1 score for training set: 1.0000.
-Made predictions in 0.0010 seconds.
+Made predictions in 0.0020 seconds.
 F1 score for test set: 0.6720.
 None
 Decision KNN (300 Size)
 Training a KNeighborsClassifier using a training set size of 300. . .
-Trained model in 0.0050 seconds
-Made predictions in 0.0190 seconds.
+Trained model in 0.0060 seconds
+Made predictions in 0.0260 seconds.
 F1 score for training set: 0.8815.
-Made predictions in 0.0090 seconds.
+Made predictions in 0.0110 seconds.
 F1 score for test set: 0.7626.
 None
 Decision SVC (300 Size)
 Training a SVC using a training set size of 300. . .
-Trained model in 0.0210 seconds
-Made predictions in 0.0150 seconds.
+Trained model in 0.0230 seconds
+Made predictions in 0.0160 seconds.
 F1 score for training set: 0.8615.
-Made predictions in 0.0050 seconds.
+Made predictions in 0.0060 seconds.
+F1 score for test set: 0.8079.
+None
+Decision Tree Classifier (300 Size) Default
+Training a DecisionTreeClassifier using a training set size of 300. . .
+Trained model in 0.0080 seconds
+Made predictions in 0.0020 seconds.
+F1 score for training set: 1.0000.
+Made predictions in 0.0020 seconds.
+F1 score for test set: 0.6822.
+None
+Decision KNN (300 Size) Default
+Training a KNeighborsClassifier using a training set size of 300. . .
+Trained model in 0.0040 seconds
+Made predictions in 0.0210 seconds.
+F1 score for training set: 0.8421.
+Made predictions in 0.0100 seconds.
+F1 score for test set: 0.7714.
+None
+Decision SVC (300 Size) Default
+Training a SVC using a training set size of 300. . .
+Trained model in 0.0230 seconds
+Made predictions in 0.0160 seconds.
+F1 score for training set: 0.8615.
+Made predictions in 0.0060 seconds.
 F1 score for test set: 0.8079.
 None
 </pre>
@@ -12504,7 +12665,7 @@ None
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0080</td>
+<td style="text-align:center">0.0100</td>
 <td style="text-align:center">0.0010</td>
 <td style="text-align:center">1.0000</td>
 <td style="text-align:center">0.6720</td>
@@ -12524,22 +12685,22 @@ None
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.0030</td>
 <td style="text-align:center">0.0060</td>
+<td style="text-align:center">0.0070</td>
 <td style="text-align:center">0.8369</td>
 <td style="text-align:center">0.7324</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0050</td>
 <td style="text-align:center">0.0060</td>
+<td style="text-align:center">0.0070</td>
 <td style="text-align:center">0.8441</td>
 <td style="text-align:center">0.7669</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0050</td>
-<td style="text-align:center">0.0090</td>
+<td style="text-align:center">0.0060</td>
+<td style="text-align:center">0.0110</td>
 <td style="text-align:center">0.8815</td>
 <td style="text-align:center">0.7626</td>
 </tr>
@@ -12559,26 +12720,33 @@ None
 <tr>
 <td style="text-align:center">100</td>
 <td style="text-align:center">0.0070</td>
-<td style="text-align:center">0.0040</td>
+<td style="text-align:center">0.0030</td>
 <td style="text-align:center">0.8366</td>
 <td style="text-align:center">0.8228</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0130</td>
+<td style="text-align:center">0.0120</td>
 <td style="text-align:center">0.0040</td>
 <td style="text-align:center">0.8552</td>
 <td style="text-align:center">0.7947</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0240</td>
+<td style="text-align:center">0.0210</td>
 <td style="text-align:center">0.0060</td>
 <td style="text-align:center">0.8615</td>
 <td style="text-align:center">0.8079</td>
 </tr>
 </tbody>
 </table>
+<p>The default DecisionTreeClassifier and KNeighborsClassifier performs better than the [100,200,300] Algorithm Classifier</p>
+<p>Decision Tree Classifier (300 Size) Default
+F1 score for test set: 0.6822.</p>
+<p>Decision SVC (300 Size) Default
+F1 score for test set: 0.7714.</p>
+<p>Decision SVC (300 Size) Default
+F1 score for test set: 0.8079.</p>
 
 </div>
 </div>
@@ -12609,6 +12777,8 @@ None
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong> The most appropriate is SVC, because it hasn't overfit with the training data(F1 Score(train)&lt;&lt;1), it has a good F1  Score(test), at least is the closest to 1 between all classifiers and it is robust to data noise.</p>
+<p>There is a downside, it's the slowest technique between the three available.</p>
+<p>It has taken 0.210 seconds, 350% seconds more than KNeighborsClassifier and 210% seconds more than DecisionTreeClassifier</p>
 
 </div>
 </div>
@@ -12629,6 +12799,10 @@ None
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>SVM, Support Vector Machine is good when we can make a visible spread between the data(straight line), the main ideia is to maximize the distance between the support vectors, which are the core data for this technique.</p>
+<ul>
+<li>The SVM takes data about previous students (age, gender, family, etc), and uses them to create a function that draws a boundary between the students who passed and those who didn't. The boundary should be drawn so as to maximize the margin,and the margin is the distance between the support vectors.With that in mind, we can draw an optimal hyperplane which successfully separate "good students" and "bad students".Often, though, it's not easy to draw a decision boundary in low dimensions, so the SVM separates the passing and failing students by 3D dimensions, that is know as the kernel trick.</li>
+<li>Using this function created with students we already know passed or not, the SVM can look at new students' data and predict if they are more likely to be a passed_student("good student") or a failed student("bad student").</li>
+</ul>
 
 </div>
 </div>
@@ -12659,17 +12833,17 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;GridSearchCV&#39; and &#39;make_scorer&#39;</span>
 <span class="kn">from</span> <span class="nn">sklearn.grid_search</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span>
 <span class="c1"># TODO: Create the parameters list you wish to tune</span>
-<span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="mo">01</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span><span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">],}</span>
 
 <span class="c1"># TODO: Initialize the classifier</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="c1">#Same random_state=10 from untuned model</span>
 
 <span class="c1"># TODO: Make an f1 scoring function using &#39;make_scorer&#39; </span>
 <span class="n">f1_scorer</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">f1_score</span><span class="p">,</span><span class="n">pos_label</span> <span class="o">=</span> <span class="s1">&#39;yes&#39;</span><span class="p">)</span>
@@ -12686,6 +12860,9 @@ None
 <span class="c1"># Report the final F1 score for training and testing after parameter tuning</span>
 <span class="k">print</span> <span class="s2">&quot;Tuned model has a training F1 score of {:.4f}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">predict_labels</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
 <span class="k">print</span> <span class="s2">&quot;Tuned model has a testing F1 score of {:.4f}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">predict_labels</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<span class="k">print</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
+<span class="k">print</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">grid_obj</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12698,10 +12875,18 @@ None
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Made predictions in 0.0130 seconds.
-Tuned model has a training F1 score of 0.8615.
-Made predictions in 0.0060 seconds.
-Tuned model has a testing F1 score of 0.8079.
+<pre>Made predictions in 0.0120 seconds.
+Tuned model has a training F1 score of 0.8330.
+Made predictions in 0.0050 seconds.
+Tuned model has a testing F1 score of 0.8182.
+
+             precision    recall  f1-score   support
+
+         no       0.57      0.14      0.22        29
+        yes       0.72      0.95      0.82        66
+
+avg / total       0.67      0.71      0.64        95
+
 </pre>
 </div>
 </div>
@@ -12725,9 +12910,25 @@ Tuned model has a testing F1 score of 0.8079.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Training F1 score is 0.8615 and testing 0.8079.
-Untuned model Training F1 score is 0.8615 and testing 08079.</p>
-<p>There is no change between the tuned and untuned model.</p>
+<p><strong>Answer: </strong> F1(final model) - Training: 0.8330, Testing: 0.8182</p>
+<p>Untuned Mode F1(SVM) - Training: 0.8615, Training Time: 0.0160 seconds, Testing: 0.8079, Testing Time:0.0060 seconds</p>
+<p>Untuned Model Data</p>
+<ul>
+<li>Made predictions in 0.0160 seconds.</li>
+<li>F1 score for training set: 0.8615.</li>
+<li>Made predictions in 0.0060 seconds.</li>
+<li>F1 score for test set: 0.8079.</li>
+</ul>
+<p>Tuned Model Data</p>
+<ul>
+<li>Made predictions in 0.0120 seconds.</li>
+<li>Tuned model has a training F1 score of 0.8330.</li>
+<li>Made predictions in 0.0050 seconds.</li>
+<li>Tuned model has a testing F1 score of 0.8182.</li>
+</ul>
+<p>The tuned model has a lower prediction time and a better F1 score, the tuned model works really well.</p>
+<p>One thing that should be said, it's that the F1 score for training set in the Untuned Model has a better score(0.8615) than the Tuned Model(0.8330).
+That's probably because the Tuned model could generalize better the data, and avoid 'overfitting' too much based on training data.</p>
 
 </div>
 </div>
